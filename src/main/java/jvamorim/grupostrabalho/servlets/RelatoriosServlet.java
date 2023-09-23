@@ -1,4 +1,4 @@
-package jvamorim.grupostrabalho;
+package jvamorim.grupostrabalho.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
