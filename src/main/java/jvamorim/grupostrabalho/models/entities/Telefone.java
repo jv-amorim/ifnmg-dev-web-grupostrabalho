@@ -6,10 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import jvamorim.grupostrabalho.models.enums.TipoLogradouro;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-public class Endereco implements Serializable {
+@Table(name = "telefone")
+public class Telefone implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -18,16 +21,14 @@ public class Endereco implements Serializable {
     private Long id;
     
     @Column(nullable = false)
-    private TipoLogradouro tipoLogradouro;
-
-    @Column(length = 150, nullable = false)
-    private String logradouro;
+    private Byte ddd;
     
     @Column(nullable = false)
     private Integer numero;
     
-    @Column(length = 25, nullable = false)
-    private String bairro;
+    @ManyToOne
+    @JoinColumn(name = "pessoaid", nullable = false)
+    private Pessoa pessoa;
 
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     
@@ -38,21 +39,13 @@ public class Endereco implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-        
-    public TipoLogradouro getTipoLogradouro() {
-        return tipoLogradouro;
+
+    public Byte getDdd() {
+        return ddd;
     }
 
-    public void setTipoLogradouro(TipoLogradouro tipoLogradouro) {
-        this.tipoLogradouro = tipoLogradouro;
-    }
-
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
+    public void setDdd(Byte ddd) {
+        this.ddd = ddd;
     }
 
     public Integer getNumero() {
@@ -63,12 +56,12 @@ public class Endereco implements Serializable {
         this.numero = numero;
     }
 
-    public String getBairro() {
-        return bairro;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
     
     //</editor-fold>

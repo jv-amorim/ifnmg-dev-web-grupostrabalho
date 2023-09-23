@@ -3,14 +3,20 @@ package jvamorim.grupostrabalho.models.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.YEARS;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
+@Table(name = "pessoa")
 public class Pessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,6 +36,28 @@ public class Pessoa implements Serializable {
     
     @Transient
     private Byte idade;
+    
+    @OneToOne(optional = false)
+    private Endereco endereco;
+    
+    @OneToMany(mappedBy = "pessoa")
+    private List<Telefone> telefones;
+    
+    @OneToMany(mappedBy = "lider")
+    private List<Grupo> gruposLiderados;
+    
+    @OneToMany(mappedBy = "pessoa")
+    private List<Atuacao> atuacoes;
+    
+    //<editor-fold defaultstate="collapsed" desc="Constructors">
+    
+    public Pessoa() {
+        telefones = new ArrayList<Telefone>();
+        gruposLiderados = new ArrayList<Grupo>();
+        atuacoes = new ArrayList<Atuacao>();
+    }
+    
+    //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     
@@ -67,6 +95,38 @@ public class Pessoa implements Serializable {
 
     public Byte getIdade() {
         return (byte)YEARS.between(nascimento, LocalDate.now());
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
+    }
+
+    public List<Grupo> getGruposLiderados() {
+        return gruposLiderados;
+    }
+
+    public void setGruposLiderados(List<Grupo> gruposLiderados) {
+        this.gruposLiderados = gruposLiderados;
+    }
+
+    public List<Atuacao> getAtuacoes() {
+        return atuacoes;
+    }
+
+    public void setAtuacoes(List<Atuacao> atuacoes) {
+        this.atuacoes = atuacoes;
     }
     
     //</editor-fold>
