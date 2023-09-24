@@ -1,14 +1,11 @@
 package jvamorim.grupostrabalho.beans;
 
 import java.time.LocalDate;
-import java.time.Month;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.inject.Inject;
 import jvamorim.grupostrabalho.models.entities.Atuacao;
-import jvamorim.grupostrabalho.models.entities.AtuacaoKey;
 import jvamorim.grupostrabalho.models.entities.Endereco;
 import jvamorim.grupostrabalho.models.entities.Grupo;
 import jvamorim.grupostrabalho.models.entities.Pessoa;
@@ -19,8 +16,11 @@ import jvamorim.grupostrabalho.models.enums.TipoLogradouro;
 @Startup
 public class CargaDadosBean implements CargaDadosBeanLocal {
     
-    @PersistenceContext(unitName = "GruposTrabalhoPU")
-    private EntityManager entityManager;
+    @Inject private AtuacaoBeanLocal atuacaoBean;
+    @Inject private EnderecoBeanLocal enderecoBean;
+    @Inject private GrupoBeanLocal grupoBean;
+    @Inject private PessoaBeanLocal pessoaBean;
+    @Inject private TelefoneBeanLocal telefoneBean;
     
     @PostConstruct
     @Override
@@ -237,41 +237,39 @@ public class CargaDadosBean implements CargaDadosBeanLocal {
         
         // Persist:
         
-        entityManager.persist(enderecoAna);
-        entityManager.persist(enderecoBeatriz);
-        entityManager.persist(enderecoCecilia);
-        entityManager.persist(enderecoDebora);
+        enderecoBean.save(enderecoAna);
+        enderecoBean.save(enderecoBeatriz);
+        enderecoBean.save(enderecoCecilia);
+        enderecoBean.save(enderecoDebora);
         
-        entityManager.persist(pessoaAna);
-        entityManager.persist(pessoaBeatriz);
-        entityManager.persist(pessoaCecilia);
-        entityManager.persist(pessoaDebora);
+        pessoaBean.save(pessoaAna);
+        pessoaBean.save(pessoaBeatriz);
+        pessoaBean.save(pessoaCecilia);
+        pessoaBean.save(pessoaDebora);
         
-        entityManager.persist(telefoneAna1);
-        entityManager.persist(telefoneAna2);
-        entityManager.persist(telefoneAna3);
-        entityManager.persist(telefoneBeatriz1);
-        entityManager.persist(telefoneDebora1);
-        entityManager.persist(telefoneDebora2);
+        telefoneBean.save(telefoneAna1);
+        telefoneBean.save(telefoneAna2);
+        telefoneBean.save(telefoneAna3);
+        telefoneBean.save(telefoneBeatriz1);
+        telefoneBean.save(telefoneDebora1);
+        telefoneBean.save(telefoneDebora2);
         
-        entityManager.persist(grupo1);
-        entityManager.persist(grupo2);
-        entityManager.persist(grupo3);
-        entityManager.persist(grupo4);
+        grupoBean.save(grupo1);
+        grupoBean.save(grupo2);
+        grupoBean.save(grupo3);
+        grupoBean.save(grupo4);
         
-        entityManager.persist(atuacao1);
-        entityManager.persist(atuacao2);
-        entityManager.persist(atuacao3);
-        entityManager.persist(atuacao4);
-        entityManager.persist(atuacao5);
-        entityManager.persist(atuacao6);
-        entityManager.persist(atuacao7);
-        entityManager.persist(atuacao8);
-        entityManager.persist(atuacao9);
-        entityManager.persist(atuacao10);
-        entityManager.persist(atuacao11);
-        
-        entityManager.flush();
+        atuacaoBean.save(atuacao1);
+        atuacaoBean.save(atuacao2);
+        atuacaoBean.save(atuacao3);
+        atuacaoBean.save(atuacao4);
+        atuacaoBean.save(atuacao5);
+        atuacaoBean.save(atuacao6);
+        atuacaoBean.save(atuacao7);
+        atuacaoBean.save(atuacao8);
+        atuacaoBean.save(atuacao9);
+        atuacaoBean.save(atuacao10);
+        atuacaoBean.save(atuacao11);
     }
     
 }
