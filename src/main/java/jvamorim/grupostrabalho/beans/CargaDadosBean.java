@@ -1,11 +1,14 @@
 package jvamorim.grupostrabalho.beans;
 
 import java.time.LocalDate;
+import java.time.Month;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import jvamorim.grupostrabalho.models.entities.Atuacao;
+import jvamorim.grupostrabalho.models.entities.AtuacaoKey;
 import jvamorim.grupostrabalho.models.entities.Endereco;
 import jvamorim.grupostrabalho.models.entities.Grupo;
 import jvamorim.grupostrabalho.models.entities.Pessoa;
@@ -141,7 +144,96 @@ public class CargaDadosBean implements CargaDadosBeanLocal {
         grupo4.setAtivo(true);
         grupo4.setLider(pessoaBeatriz);
         pessoaBeatriz.getGruposLiderados().add(grupo4);
-               
+        
+        
+        // Atuações:
+        
+        Atuacao atuacao1 = new Atuacao();
+        atuacao1.setGrupo(grupo1);
+        atuacao1.setPessoa(pessoaAna);
+        atuacao1.setInicio(LocalDate.of(2011, 01, 01));
+        atuacao1.setTermino(LocalDate.of(2021, 11, 11));
+        grupo1.getAtuacoes().add(atuacao1);
+        pessoaAna.getAtuacoes().add(atuacao1);
+        
+        Atuacao atuacao2 = new Atuacao();
+        atuacao2.setGrupo(grupo1);
+        atuacao2.setPessoa(pessoaBeatriz);
+        atuacao2.setInicio(LocalDate.of(2012, 01, 02));
+        atuacao2.setTermino(LocalDate.of(2021, 01, 12));
+        grupo1.getAtuacoes().add(atuacao2);
+        pessoaBeatriz.getAtuacoes().add(atuacao2);
+        
+        Atuacao atuacao3 = new Atuacao();
+        atuacao3.setGrupo(grupo1);
+        atuacao3.setPessoa(pessoaCecilia);
+        atuacao3.setInicio(LocalDate.of(2013, 01, 03));
+        atuacao3.setTermino(LocalDate.of(2021, 01, 13));
+        grupo1.getAtuacoes().add(atuacao3);
+        pessoaCecilia.getAtuacoes().add(atuacao3);
+        
+        Atuacao atuacao4 = new Atuacao();
+        atuacao4.setGrupo(grupo1);
+        atuacao4.setPessoa(pessoaDebora);
+        atuacao4.setInicio(LocalDate.of(2014, 01, 04));
+        atuacao4.setTermino(LocalDate.of(2021, 01, 14));
+        grupo1.getAtuacoes().add(atuacao4);
+        pessoaDebora.getAtuacoes().add(atuacao4);
+        
+        Atuacao atuacao5 = new Atuacao();
+        atuacao5.setGrupo(grupo2);
+        atuacao5.setPessoa(pessoaBeatriz);
+        atuacao5.setInicio(LocalDate.of(2012, 01, 02));
+        grupo2.getAtuacoes().add(atuacao5);
+        pessoaBeatriz.getAtuacoes().add(atuacao5);
+        
+        Atuacao atuacao6 = new Atuacao();
+        atuacao6.setGrupo(grupo2);
+        atuacao6.setPessoa(pessoaDebora);
+        atuacao6.setInicio(LocalDate.of(2012, 01, 02));
+        grupo2.getAtuacoes().add(atuacao6);
+        pessoaDebora.getAtuacoes().add(atuacao6);
+        
+        Atuacao atuacao7 = new Atuacao();
+        atuacao7.setGrupo(grupo3);
+        atuacao7.setPessoa(pessoaCecilia);
+        atuacao7.setInicio(LocalDate.of(2012, 01, 03));
+        atuacao7.setTermino(LocalDate.of(2023, 01, 13));
+        grupo3.getAtuacoes().add(atuacao7);
+        pessoaCecilia.getAtuacoes().add(atuacao7);
+        
+        Atuacao atuacao8 = new Atuacao();
+        atuacao8.setGrupo(grupo3);
+        atuacao8.setPessoa(pessoaDebora);
+        atuacao8.setInicio(LocalDate.of(2012, 01, 03));
+        atuacao8.setTermino(LocalDate.of(2023, 01, 13));
+        grupo3.getAtuacoes().add(atuacao8);
+        pessoaDebora.getAtuacoes().add(atuacao8);
+        
+        Atuacao atuacao9 = new Atuacao();
+        atuacao9.setGrupo(grupo4);
+        atuacao9.setPessoa(pessoaBeatriz);
+        atuacao9.setInicio(LocalDate.of(2012, 01, 04));
+        atuacao9.setTermino(LocalDate.of(2024, 01, 14));
+        grupo4.getAtuacoes().add(atuacao9);
+        pessoaBeatriz.getAtuacoes().add(atuacao9);
+        
+        Atuacao atuacao10 = new Atuacao();
+        atuacao10.setGrupo(grupo4);
+        atuacao10.setPessoa(pessoaCecilia);
+        atuacao10.setInicio(LocalDate.of(2012, 01, 04));
+        atuacao10.setTermino(LocalDate.of(2024, 01, 14));
+        grupo4.getAtuacoes().add(atuacao10);
+        pessoaCecilia.getAtuacoes().add(atuacao10);
+        
+        Atuacao atuacao11 = new Atuacao();
+        atuacao11.setGrupo(grupo4);
+        atuacao11.setPessoa(pessoaDebora);
+        atuacao11.setInicio(LocalDate.of(2012, 01, 04));
+        atuacao11.setTermino(LocalDate.of(2024, 01, 14));
+        grupo4.getAtuacoes().add(atuacao11);
+        pessoaDebora.getAtuacoes().add(atuacao11);
+        
         
         // Persist:
         
@@ -166,6 +258,18 @@ public class CargaDadosBean implements CargaDadosBeanLocal {
         entityManager.persist(grupo2);
         entityManager.persist(grupo3);
         entityManager.persist(grupo4);
+        
+        entityManager.persist(atuacao1);
+        entityManager.persist(atuacao2);
+        entityManager.persist(atuacao3);
+        entityManager.persist(atuacao4);
+        entityManager.persist(atuacao5);
+        entityManager.persist(atuacao6);
+        entityManager.persist(atuacao7);
+        entityManager.persist(atuacao8);
+        entityManager.persist(atuacao9);
+        entityManager.persist(atuacao10);
+        entityManager.persist(atuacao11);
         
         entityManager.flush();
     }

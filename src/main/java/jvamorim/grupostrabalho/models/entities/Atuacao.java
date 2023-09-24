@@ -33,6 +33,14 @@ public class Atuacao implements Serializable {
     @Column(nullable = true)
     private LocalDate termino;
     
+    //<editor-fold defaultstate="collapsed" desc="Constructors">
+    
+    public Atuacao() {
+        id = new AtuacaoKey();
+    }
+    
+    //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     
     public AtuacaoKey getId() {
