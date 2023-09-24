@@ -16,11 +16,7 @@ import jvamorim.grupostrabalho.models.enums.TipoLogradouro;
 @Startup
 public class CargaDadosBean implements CargaDadosBeanLocal {
     
-    @Inject private AtuacaoBeanLocal atuacaoBean;
-    @Inject private EnderecoBeanLocal enderecoBean;
-    @Inject private GrupoBeanLocal grupoBean;
     @Inject private PessoaBeanLocal pessoaBean;
-    @Inject private TelefoneBeanLocal telefoneBean;
     
     @PostConstruct
     @Override
@@ -245,39 +241,10 @@ public class CargaDadosBean implements CargaDadosBeanLocal {
         
         // Persist:
         
-        enderecoBean.save(enderecoAna);
-        enderecoBean.save(enderecoBeatriz);
-        enderecoBean.save(enderecoCecilia);
-        enderecoBean.save(enderecoDebora);
-        
         pessoaBean.save(pessoaAna);
         pessoaBean.save(pessoaBeatriz);
         pessoaBean.save(pessoaCecilia);
         pessoaBean.save(pessoaDebora);
-        
-        telefoneBean.save(telefoneAna1);
-        telefoneBean.save(telefoneAna2);
-        telefoneBean.save(telefoneAna3);
-        telefoneBean.save(telefoneBeatriz1);
-        telefoneBean.save(telefoneDebora1);
-        telefoneBean.save(telefoneDebora2);
-        
-        grupoBean.save(grupo1);
-        grupoBean.save(grupo2);
-        grupoBean.save(grupo3);
-        grupoBean.save(grupo4);
-        
-        atuacaoBean.save(atuacao1);
-        atuacaoBean.save(atuacao2);
-        atuacaoBean.save(atuacao3);
-        atuacaoBean.save(atuacao4);
-        atuacaoBean.save(atuacao5);
-        atuacaoBean.save(atuacao6);
-        atuacaoBean.save(atuacao7);
-        atuacaoBean.save(atuacao8);
-        atuacaoBean.save(atuacao9);
-        atuacaoBean.save(atuacao10);
-        atuacaoBean.save(atuacao11);
     }
     
 }

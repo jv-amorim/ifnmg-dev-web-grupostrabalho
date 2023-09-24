@@ -2,6 +2,7 @@ package jvamorim.grupostrabalho.models.entities;
 
 import java.io.Serializable;
 import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class Telefone implements Serializable {
     @Column(nullable = false)
     private Integer numero;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "pessoaid", nullable = false)
     @JsonbTransient
     private Pessoa pessoa;

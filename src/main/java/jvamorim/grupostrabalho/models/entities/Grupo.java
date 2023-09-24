@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,12 +30,12 @@ public class Grupo implements Serializable {
     @Column(nullable = false)
     private Boolean ativo;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "liderid", nullable = false)
     @JsonbTransient
     private Pessoa lider;
     
-    @OneToMany(mappedBy = "grupo", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Atuacao> atuacoes;
     
     //<editor-fold defaultstate="collapsed" desc="Constructors">

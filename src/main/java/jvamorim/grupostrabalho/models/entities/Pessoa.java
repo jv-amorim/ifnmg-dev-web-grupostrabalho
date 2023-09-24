@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.YEARS;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,17 +44,17 @@ public class Pessoa implements Serializable {
     @Transient
     private Byte idade;
     
-    @OneToOne(optional = false)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, optional = false)
     @JoinColumn(name = "enderecoid")
     private Endereco endereco;
     
-    @OneToMany(mappedBy = "pessoa")
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Telefone> telefones;
     
-    @OneToMany(mappedBy = "lider")
+    @OneToMany(mappedBy = "lider", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Grupo> gruposLiderados;
     
-    @OneToMany(mappedBy = "pessoa")
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Atuacao> atuacoes;
     
     //<editor-fold defaultstate="collapsed" desc="Constructors">
