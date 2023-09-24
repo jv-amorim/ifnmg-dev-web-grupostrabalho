@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 import jvamorim.grupostrabalho.beans.AtuacaoBeanLocal;
 import jvamorim.grupostrabalho.beans.PessoaBeanLocal;
 import jvamorim.grupostrabalho.beans.GrupoBeanLocal;
+import jvamorim.grupostrabalho.models.dtos.MembroDto;
 import jvamorim.grupostrabalho.models.entities.Pessoa;
 import jvamorim.grupostrabalho.models.entities.Grupo;
 import jvamorim.grupostrabalho.utils.Utils;
@@ -72,6 +73,8 @@ public class RelatoriosServlet extends HttpServlet {
             generateHtmlQuestao18(out);
             generateHtmlQuestao19(out);
             generateHtmlQuestao20(out);
+            generateHtmlQuestao21(out);
+            generateHtmlQuestao22(out);
             generateHtmlScript(out);
             
             out.println("</body>");
@@ -155,6 +158,8 @@ public class RelatoriosServlet extends HttpServlet {
         out.println("<li><a href=\"#consulta-18\"> Consulta 18 </a></li>");
         out.println("<li><a href=\"#consulta-19\"> Consulta 19 </a></li>");
         out.println("<li><a href=\"#consulta-20\"> Consulta 20 </a></li>");
+        out.println("<li><a href=\"#consulta-21\"> Consulta 21 </a></li>");
+        out.println("<li><a href=\"#consulta-22\"> Consulta 22 </a></li>");
         
         out.println("</ul>");
     }
@@ -432,7 +437,30 @@ public class RelatoriosServlet extends HttpServlet {
     }
     
     private void generateHtmlQuestao20(PrintWriter out) {
-        
+        List<MembroDto> dtos = atuacaoBean.findAllMembroDtoByGrupoIdAndMinimumDate(null, LocalDate.of(2012, 01, 01));
+        out.println(buildHtmlQuestao(
+            "consulta-20",
+            "Consulta 20: Quais os grupos (nomes), membros (nomes) e as respectivas datas de entrada daqueles que entraram a partir de 2012 em qualquer grupo?",
+            dtos
+        ));
+    }
+    
+    private void generateHtmlQuestao21(PrintWriter out) {
+        List<Object[]> atuacoes = atuacaoBean.findAllGruposWithoutTermino();
+        out.println(buildHtmlQuestao(
+            "consulta-21",
+            "Consulta 21: Quais os grupos (nomes) e respectivos membros (nomes) que não possuem data de término de atuação em seus grupos?",
+            atuacoes
+        ));
+    }
+    
+    private void generateHtmlQuestao22(PrintWriter out) {
+        List<Object[]> grupos = grupoBean.findAllGrupoNomesLideresMembros();
+        out.println(buildHtmlQuestao(
+            "consulta-22",
+            "Consulta 22: Quais são os grupos (nomes) e líderes (nomes) com respectivos membros (nomes)?",
+            grupos
+        ));
     }
  
     private void generateHtmlScript(PrintWriter out) {

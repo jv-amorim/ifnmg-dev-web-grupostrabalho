@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import jvamorim.grupostrabalho.models.dtos.MembroDto;
 import jvamorim.grupostrabalho.models.entities.Atuacao;
 
 public class AtuacaoBean implements AtuacaoBeanLocal {
@@ -31,6 +32,20 @@ public class AtuacaoBean implements AtuacaoBeanLocal {
         q.setParameter("minDate", minDate);
         return q.getResultList();
         
+    }
+
+    @Override
+    public List<MembroDto> findAllMembroDtoByGrupoIdAndMinimumDate(Long grupoId, LocalDate minDate) {
+        TypedQuery q = entityManager.createNamedQuery("Atuacao.findAllMembroDtoByGrupoIdAndMinimumDate", MembroDto.class);
+        q.setParameter("grupoId", grupoId);
+        q.setParameter("minDate", minDate);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Object[]> findAllGruposWithoutTermino() {
+        TypedQuery q = entityManager.createNamedQuery("Atuacao.findAllGruposWithoutTermino", Object[].class);
+        return q.getResultList();
     }
     
 }

@@ -20,5 +20,7 @@ public interface GrupoBeanLocal {
     public List<Object[]> findAllMembroCount();
 
     public List<Object[]> findAllMembroCountWithMinimum(Long min);
+
+    public List<Object[]> findAllGrupoNomesLideresMembros();
     
 }

@@ -29,7 +29,20 @@ import javax.persistence.Table;
         name = "Atuacao.findAllMembroNomeByGrupoIdAndMinimumDate",
         query = "SELECT DISTINCT a.pessoa.nome "
               + "FROM Atuacao a "
-              + "WHERE a.grupo.id = :grupoId AND a.inicio >= :minDate"
+              + "WHERE (a.grupo.id = :grupoId OR :grupoId IS NULL) AND a.inicio >= :minDate"
+    ),
+    @NamedQuery(
+        name = "Atuacao.findAllMembroDtoByGrupoIdAndMinimumDate",
+        query = "SELECT new jvamorim.grupostrabalho.models.dtos.MembroDto(a.grupo.nome, a.pessoa.nome, a.inicio) "
+              + "FROM Atuacao a "
+              + "WHERE (a.grupo.id = :grupoId OR :grupoId IS NULL) AND a.inicio >= :minDate "
+              + "ORDER BY a.grupo.nome, a.inicio"
+    ),
+    @NamedQuery(
+        name = "Atuacao.findAllGruposWithoutTermino",
+        query = "SELECT a.grupo.nome, a.pessoa.nome "
+              + "FROM Atuacao a "
+              + "WHERE a.termino IS NULL"
     ),
 })
 public class Atuacao implements Serializable {

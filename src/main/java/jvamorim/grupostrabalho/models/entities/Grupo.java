@@ -63,6 +63,13 @@ import javax.persistence.Table;
               + "GROUP BY g.nome "
               + "HAVING COUNT(DISTINCT a.pessoa.id) >= :min"
     ),
+    @NamedQuery(
+        name = "Grupo.findAllGrupoNomesLideresMembros",
+        query = "SELECT DISTINCT g.nome, g.lider.nome, a.pessoa.nome "
+              + "FROM Grupo g, IN (g.atuacoes) a "
+              + "WHERE g.lider.id != a.pessoa.id "
+              + "ORDER BY g.nome, g.lider.nome, a.pessoa.nome"
+    ),
 })
 public class Grupo implements Serializable {
 

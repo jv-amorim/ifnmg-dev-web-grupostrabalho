@@ -61,5 +61,11 @@ public class GrupoBean implements GrupoBeanLocal {
         q.setParameter("min", min);
         return q.getResultList();
     }
+
+    @Override
+    public List<Object[]> findAllGrupoNomesLideresMembros() {
+        TypedQuery q = entityManager.createNamedQuery("Grupo.findAllGrupoNomesLideresMembros", Object[].class);
+        return q.getResultList();
+    }
     
 }
