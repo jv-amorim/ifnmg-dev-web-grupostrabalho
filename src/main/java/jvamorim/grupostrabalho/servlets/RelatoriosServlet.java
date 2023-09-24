@@ -67,6 +67,11 @@ public class RelatoriosServlet extends HttpServlet {
             generateHtmlQuestao13(out);
             generateHtmlQuestao14(out);
             generateHtmlQuestao15(out);
+            generateHtmlQuestao16(out);
+            generateHtmlQuestao17(out);
+            generateHtmlQuestao18(out);
+            generateHtmlQuestao19(out);
+            generateHtmlQuestao20(out);
             generateHtmlScript(out);
             
             out.println("</body>");
@@ -145,6 +150,11 @@ public class RelatoriosServlet extends HttpServlet {
         out.println("<li><a href=\"#consulta-13\"> Consulta 13 </a></li>");
         out.println("<li><a href=\"#consulta-14\"> Consulta 14 </a></li>");
         out.println("<li><a href=\"#consulta-15\"> Consulta 15 </a></li>");
+        out.println("<li><a href=\"#consulta-16\"> Consulta 16 </a></li>");
+        out.println("<li><a href=\"#consulta-17\"> Consulta 17 </a></li>");
+        out.println("<li><a href=\"#consulta-18\"> Consulta 18 </a></li>");
+        out.println("<li><a href=\"#consulta-19\"> Consulta 19 </a></li>");
+        out.println("<li><a href=\"#consulta-20\"> Consulta 20 </a></li>");
         
         out.println("</ul>");
     }
@@ -383,6 +393,46 @@ public class RelatoriosServlet extends HttpServlet {
             "Consulta 15: Quais são as datas de início e de término da atuação e os grupos (nomes) nos quais \"Cecília Xerxes\" é membro?",
             atuacoes
         ));
+    }
+    
+    private void generateHtmlQuestao16(PrintWriter out) {
+        List<Grupo> grupos = grupoBean.findAllByNameLike("II");
+        out.println(buildHtmlQuestao(
+            "consulta-16",
+            "Consulta 16: Quais são os grupos (dados completos) que contêm \"II\" em seus nomes?",
+            grupos
+        ));
+    }
+    
+    private void generateHtmlQuestao17(PrintWriter out) {
+        List<Object[]> grupos = grupoBean.findAllMembroCount();
+        out.println(buildHtmlQuestao(
+            "consulta-17",
+            "Consulta 17: Quais são os grupos (nomes) e os respectivos totais de membros distintos já alocados?",
+            grupos
+        ));
+    }
+    
+    private void generateHtmlQuestao18(PrintWriter out) {
+        List<Object[]> grupos = grupoBean.findAllMembroCountWithMinimum(3L);
+        out.println(buildHtmlQuestao(
+            "consulta-18",
+            "Consulta 18: Quais grupos (nomes) têm 3 ou mais atuações de membros e quanto são esses totais de atuações?",
+            grupos
+        ));
+    }
+    
+    private void generateHtmlQuestao19(PrintWriter out) {
+        List<String> nomes = atuacaoBean.findAllMembroNomeByGrupoIdAndMinimumDate(1L, LocalDate.of(2012, 01, 01));
+        out.println(buildHtmlQuestao(
+            "consulta-19",
+            "Consulta 19: Quais membros (nomes) entraram a partir de 2012 no primeiro grupo?",
+            nomes
+        ));
+    }
+    
+    private void generateHtmlQuestao20(PrintWriter out) {
+        
     }
  
     private void generateHtmlScript(PrintWriter out) {

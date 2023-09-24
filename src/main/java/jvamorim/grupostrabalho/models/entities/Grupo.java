@@ -44,6 +44,25 @@ import javax.persistence.Table;
               + "FROM Grupo g "
               + "WHERE g.lider.nome = :nomeLider "
     ),
+    @NamedQuery(
+        name = "Grupo.findAllByNameLike",
+        query = "SELECT g "
+              + "FROM Grupo g "
+              + "WHERE TRIM(LOWER(g.nome)) LIKE CONCAT('%', TRIM(LOWER(:nomeGrupo)), '%')"
+    ),
+    @NamedQuery(
+        name = "Grupo.findAllMembroCount",
+        query = "SELECT DISTINCT g.nome, COUNT(DISTINCT a.pessoa.id) "
+              + "FROM Grupo g, IN (g.atuacoes) a "
+              + "GROUP BY g.nome"
+    ),
+    @NamedQuery(
+        name = "Grupo.findAllMembroCountWithMinimum",
+        query = "SELECT DISTINCT g.nome, COUNT(DISTINCT a.pessoa.id) "
+              + "FROM Grupo g, IN (g.atuacoes) a "
+              + "GROUP BY g.nome "
+              + "HAVING COUNT(DISTINCT a.pessoa.id) >= :min"
+    ),
 })
 public class Grupo implements Serializable {
 

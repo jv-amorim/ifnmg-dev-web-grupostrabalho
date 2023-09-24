@@ -1,5 +1,6 @@
 package jvamorim.grupostrabalho.beans;
 
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,6 +22,15 @@ public class AtuacaoBean implements AtuacaoBeanLocal {
         TypedQuery q = entityManager.createNamedQuery("Atuacao.findAllByMembroNome", Object[].class);
         q.setParameter("membroNome", membroNome);
         return q.getResultList();
+    }
+
+    @Override
+    public List<String> findAllMembroNomeByGrupoIdAndMinimumDate(Long grupoId, LocalDate minDate) {
+        TypedQuery q = entityManager.createNamedQuery("Atuacao.findAllMembroNomeByGrupoIdAndMinimumDate", String.class);
+        q.setParameter("grupoId", grupoId);
+        q.setParameter("minDate", minDate);
+        return q.getResultList();
+        
     }
     
 }

@@ -25,6 +25,12 @@ import javax.persistence.Table;
               + "FROM Atuacao a "
               + "WHERE a.pessoa.nome = :membroNome"
     ),
+    @NamedQuery(
+        name = "Atuacao.findAllMembroNomeByGrupoIdAndMinimumDate",
+        query = "SELECT DISTINCT a.pessoa.nome "
+              + "FROM Atuacao a "
+              + "WHERE a.grupo.id = :grupoId AND a.inicio >= :minDate"
+    ),
 })
 public class Atuacao implements Serializable {
 

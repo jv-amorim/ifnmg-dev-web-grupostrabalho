@@ -41,5 +41,25 @@ public class GrupoBean implements GrupoBeanLocal {
         q.setParameter("nomeLider", nomeLider);
         return q.getResultList();
     }
+
+    @Override
+    public List<Grupo> findAllByNameLike(String nomeGrupo) {
+        TypedQuery q = entityManager.createNamedQuery("Grupo.findAllByNameLike", Grupo.class);
+        q.setParameter("nomeGrupo", nomeGrupo);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Object[]> findAllMembroCount() {
+        TypedQuery q = entityManager.createNamedQuery("Grupo.findAllMembroCount", Object[].class);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Object[]> findAllMembroCountWithMinimum(Long min) {
+        TypedQuery q = entityManager.createNamedQuery("Grupo.findAllMembroCountWithMinimum", Object[].class);
+        q.setParameter("min", min);
+        return q.getResultList();
+    }
     
 }

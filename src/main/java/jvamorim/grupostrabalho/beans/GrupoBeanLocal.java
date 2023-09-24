@@ -14,5 +14,11 @@ public interface GrupoBeanLocal {
     public List<String> findAllMembroNomeDescByNomeGrupo(String nomeGrupo);
 
     public List<Grupo> findAllByLider(String nomeLider);
+
+    public List<Grupo> findAllByNameLike(String nomeGrupo);
+
+    public List<Object[]> findAllMembroCount();
+
+    public List<Object[]> findAllMembroCountWithMinimum(Long min);
     
 }
