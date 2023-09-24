@@ -7,15 +7,44 @@ import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "grupo")
+@NamedQueries({
+    @NamedQuery(
+        name = "Grupo.findAllInativo",
+        query = "SELECT g "
+              + "FROM Grupo g "
+              + "WHERE g.ativo = false"
+    ),
+    @NamedQuery(
+        name = "Grupo.findAllNomeLider",
+        query = "SELECT g.nome, g.lider.nome "
+              + "FROM Grupo g"
+    ),
+    @NamedQuery(
+        name = "Grupo.findAllMembroNomeDescByNomeGrupo",
+        query = "SELECT DISTINCT a.pessoa.nome "
+              + "FROM Grupo g, IN (g.atuacoes) a "
+              + "WHERE g.nome = :nomeGrupo "
+              + "ORDER BY a.pessoa.nome DESC"
+    ),
+    @NamedQuery(
+        name = "Grupo.findAllByLider",
+        query = "SELECT g "
+              + "FROM Grupo g "
+              + "WHERE g.lider.nome = :nomeLider "
+    ),
+})
 public class Grupo implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
+import jvamorim.grupostrabalho.beans.AtuacaoBeanLocal;
 import jvamorim.grupostrabalho.beans.PessoaBeanLocal;
+import jvamorim.grupostrabalho.beans.GrupoBeanLocal;
 import jvamorim.grupostrabalho.models.entities.Pessoa;
+import jvamorim.grupostrabalho.models.entities.Grupo;
 import jvamorim.grupostrabalho.utils.Utils;
 
 @Transactional
@@ -19,6 +22,10 @@ public class RelatoriosServlet extends HttpServlet {
 
     @Inject
     private PessoaBeanLocal pessoaBean;
+    @Inject
+    private GrupoBeanLocal grupoBean;
+    @Inject
+    private AtuacaoBeanLocal atuacaoBean;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,6 +62,11 @@ public class RelatoriosServlet extends HttpServlet {
             generateHtmlQuestao8(out);
             generateHtmlQuestao9(out);
             generateHtmlQuestao10(out);
+            generateHtmlQuestao11(out);
+            generateHtmlQuestao12(out);
+            generateHtmlQuestao13(out);
+            generateHtmlQuestao14(out);
+            generateHtmlQuestao15(out);
             generateHtmlScript(out);
             
             out.println("</body>");
@@ -108,35 +120,31 @@ public class RelatoriosServlet extends HttpServlet {
         out.println("<li><a href=\"#consulta-1-a\"> Consulta 1.A </a></li>");
         out.println("<li><a href=\"#consulta-1-b\"> Consulta 1.B </a></li>");
         out.println("<li><a href=\"#consulta-1-c\"> Consulta 1.C </a></li>");
-        
         out.println("<li><a href=\"#consulta-2-a\"> Consulta 2.A </a></li>");
         out.println("<li><a href=\"#consulta-2-b\"> Consulta 2.B </a></li>");
         out.println("<li><a href=\"#consulta-2-c\"> Consulta 2.C </a></li>");
-        
         out.println("<li><a href=\"#consulta-3-a\"> Consulta 3.A </a></li>");
         out.println("<li><a href=\"#consulta-3-b\"> Consulta 3.B </a></li>");
         out.println("<li><a href=\"#consulta-3-c\"> Consulta 3.C </a></li>");
-        
         out.println("<li><a href=\"#consulta-4-a\"> Consulta 4.A </a></li>");
         out.println("<li><a href=\"#consulta-4-b\"> Consulta 4.B </a></li>");
         out.println("<li><a href=\"#consulta-4-c\"> Consulta 4.C </a></li>");
-        
         out.println("<li><a href=\"#consulta-5-a\"> Consulta 5.A </a></li>");
         out.println("<li><a href=\"#consulta-5-b\"> Consulta 5.B </a></li>");
         out.println("<li><a href=\"#consulta-5-c\"> Consulta 5.C </a></li>");
-        
         out.println("<li><a href=\"#consulta-6-a\"> Consulta 6.A </a></li>");
         out.println("<li><a href=\"#consulta-6-b\"> Consulta 6.B </a></li>");
         out.println("<li><a href=\"#consulta-6-c\"> Consulta 6.C </a></li>");
-        
         out.println("<li><a href=\"#consulta-7\"> Consulta 7 </a></li>");
-        
         out.println("<li><a href=\"#consulta-8-a\"> Consulta 8.A </a></li>");
         out.println("<li><a href=\"#consulta-8-b\"> Consulta 8.B </a></li>");
-        
         out.println("<li><a href=\"#consulta-9\"> Consulta 9 </a></li>");
-        
         out.println("<li><a href=\"#consulta-10\"> Consulta 10 </a></li>");
+        out.println("<li><a href=\"#consulta-11\"> Consulta 11 </a></li>");
+        out.println("<li><a href=\"#consulta-12\"> Consulta 12 </a></li>");
+        out.println("<li><a href=\"#consulta-13\"> Consulta 13 </a></li>");
+        out.println("<li><a href=\"#consulta-14\"> Consulta 14 </a></li>");
+        out.println("<li><a href=\"#consulta-15\"> Consulta 15 </a></li>");
         
         out.println("</ul>");
     }
@@ -329,6 +337,51 @@ public class RelatoriosServlet extends HttpServlet {
             "consulta-10",
             "Consulta 10: Quantos telefones cada pessoa (nome) tem?",
             pessoas
+        ));
+    }
+    
+    private void generateHtmlQuestao11(PrintWriter out) {
+        List<Grupo> grupos = grupoBean.findAllInativo();
+        out.println(buildHtmlQuestao(
+            "consulta-11",
+            "Consulta 11: Quais grupos (dados completos) não estão ativos?",
+            grupos
+        ));
+    }
+    
+    private void generateHtmlQuestao12(PrintWriter out) {
+        List<Object[]> grupos = grupoBean.findAllNomeLider();
+        out.println(buildHtmlQuestao(
+            "consulta-12",
+            "Consulta 12: Quais são os líderes (nomes) dos grupos (nomes)?",
+            grupos
+        ));
+    }
+    
+    private void generateHtmlQuestao13(PrintWriter out) {
+        List<String> nomes = grupoBean.findAllMembroNomeDescByNomeGrupo("Estudo IV");
+        out.println(buildHtmlQuestao(
+            "consulta-13",
+            "Consulta 13: Quais são os membros (nomes) do grupo com nome \"Estudo IV\" com ordenação alfabética inversa?",
+            nomes
+        ));
+    }
+    
+    private void generateHtmlQuestao14(PrintWriter out) {
+        List<Grupo> grupos = grupoBean.findAllByLider("Beatriz Yana");
+        out.println(buildHtmlQuestao(
+            "consulta-14",
+            "Consulta 14: Quais são os grupos (dados completos) liderados por \"Beatriz Yana\"?",
+            grupos
+        ));
+    }
+    
+    private void generateHtmlQuestao15(PrintWriter out) {
+        List<Object[]> atuacoes = atuacaoBean.findAllByMembroNome("Cecília Xerxes");
+        out.println(buildHtmlQuestao(
+            "consulta-15",
+            "Consulta 15: Quais são as datas de início e de término da atuação e os grupos (nomes) nos quais \"Cecília Xerxes\" é membro?",
+            atuacoes
         ));
     }
  
