@@ -19,10 +19,28 @@ public interface PessoaBeanLocal {
     
     List<String> findAllNome_NamedQuery();
     
-    List<Pessoa> findAllNomeEndereco_Query();
+    List<Object[]> findAllNomeEndereco_Query();
     
-    List<Pessoa> findAllNomeEndereco_TypedQuery();
+    List<Object[]> findAllNomeEndereco_TypedQuery();
     
-    List<Pessoa> findAllNomeEndereco_NamedQuery();
+    List<Object[]> findAllNomeEndereco_NamedQuery();
+    
+    List<Pessoa> findAllInAvenida_Query();
+    
+    List<Pessoa> findAllInAvenida_TypedQuery();
+    
+    List<Pessoa> findAllInAvenida_NamedQuery();
+    
+    List<Pessoa> findAllNotInPraca_Query();
+    
+    List<Pessoa> findAllNotInPraca_TypedQuery();
+    
+    List<Pessoa> findAllNotInPraca_NamedQuery();
+    
+    List<Object[]> findAllNomeTelefone_Query();
+    
+    List<Object[]> findAllNomeTelefone_TypedQuery();
+    
+    List<Object[]> findAllNomeTelefone_NamedQuery();
     
 }

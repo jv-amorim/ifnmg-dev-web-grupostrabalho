@@ -47,6 +47,9 @@ public class RelatoriosServlet extends HttpServlet {
             generateHtmlQuestao1(out);
             generateHtmlQuestao2(out);
             generateHtmlQuestao3(out);
+            generateHtmlQuestao4(out);
+            generateHtmlQuestao5(out);
+            generateHtmlQuestao6(out);
             generateHtmlScript(out);
             
             out.println("</body>");
@@ -96,15 +99,31 @@ public class RelatoriosServlet extends HttpServlet {
     private void generateHtmlIndex(PrintWriter out) {
         out.println("<h2 id=\"index\">Sumário</h2>");
         out.println("<ul>");
+        
         out.println("<li><a href=\"#consulta-1-a\"> Consulta 1.A </a></li>");
         out.println("<li><a href=\"#consulta-1-b\"> Consulta 1.B </a></li>");
         out.println("<li><a href=\"#consulta-1-c\"> Consulta 1.C </a></li>");
+        
         out.println("<li><a href=\"#consulta-2-a\"> Consulta 2.A </a></li>");
         out.println("<li><a href=\"#consulta-2-b\"> Consulta 2.B </a></li>");
         out.println("<li><a href=\"#consulta-2-c\"> Consulta 2.C </a></li>");
+        
         out.println("<li><a href=\"#consulta-3-a\"> Consulta 3.A </a></li>");
         out.println("<li><a href=\"#consulta-3-b\"> Consulta 3.B </a></li>");
         out.println("<li><a href=\"#consulta-3-c\"> Consulta 3.C </a></li>");
+        
+        out.println("<li><a href=\"#consulta-4-a\"> Consulta 4.A </a></li>");
+        out.println("<li><a href=\"#consulta-4-b\"> Consulta 4.B </a></li>");
+        out.println("<li><a href=\"#consulta-4-c\"> Consulta 4.C </a></li>");
+        
+        out.println("<li><a href=\"#consulta-5-a\"> Consulta 5.A </a></li>");
+        out.println("<li><a href=\"#consulta-5-b\"> Consulta 5.B </a></li>");
+        out.println("<li><a href=\"#consulta-5-c\"> Consulta 5.C </a></li>");
+        
+        out.println("<li><a href=\"#consulta-6-a\"> Consulta 6.A </a></li>");
+        out.println("<li><a href=\"#consulta-6-b\"> Consulta 6.B </a></li>");
+        out.println("<li><a href=\"#consulta-6-c\"> Consulta 6.C </a></li>");
+        
         out.println("</ul>");
     }
 
@@ -165,24 +184,93 @@ public class RelatoriosServlet extends HttpServlet {
     }
     
     private void generateHtmlQuestao3(PrintWriter out) {
-        List<Pessoa> pessoasFromQuery = pessoaBean.findAllNomeEndereco_Query();
+        List<Object[]> pessoasFromQuery = pessoaBean.findAllNomeEndereco_Query();
         out.println(buildHtmlQuestao(
             "consulta-3-a",
             "Consulta 3.A: Quais as pessoas (nome) e seus respectivos endereços (dados completos)? Por meio de Query",
             pessoasFromQuery
         ));
         
-        List<Pessoa> pessoasFromTypedQuery = pessoaBean.findAllNomeEndereco_TypedQuery();
+        List<Object[]> pessoasFromTypedQuery = pessoaBean.findAllNomeEndereco_TypedQuery();
         out.println(buildHtmlQuestao(
             "consulta-3-b",
             "Consulta 3.B: Quais as pessoas (nome) e seus respectivos endereços (dados completos)? Por meio de TypedQuery",
             pessoasFromTypedQuery
         ));
         
-        List<Pessoa> pessoasFromNamedQuery = pessoaBean.findAllNomeEndereco_NamedQuery();
+        List<Object[]> pessoasFromNamedQuery = pessoaBean.findAllNomeEndereco_NamedQuery();
         out.println(buildHtmlQuestao(
             "consulta-3-c",
             "Consulta 3.C: Quais as pessoas (nome) e seus respectivos endereços (dados completos)? Por meio de NamedQuery",
+            pessoasFromNamedQuery
+        ));
+    }
+    
+    private void generateHtmlQuestao4(PrintWriter out) {
+        List<Pessoa> pessoasFromQuery = pessoaBean.findAllInAvenida_Query();
+        out.println(buildHtmlQuestao(
+            "consulta-4-a",
+            "Consulta 4.A: Quais pessoas (dados completos) moram em avenidas? Por meio de Query",
+            pessoasFromQuery
+        ));
+        
+        List<Pessoa> pessoasFromTypedQuery = pessoaBean.findAllInAvenida_TypedQuery();
+        out.println(buildHtmlQuestao(
+            "consulta-4-b",
+            "Consulta 4.B: Quais pessoas (dados completos) moram em avenidas? Por meio de TypedQuery",
+            pessoasFromTypedQuery
+        ));
+        
+        List<Pessoa> pessoasFromNamedQuery = pessoaBean.findAllInAvenida_NamedQuery();
+        out.println(buildHtmlQuestao(
+            "consulta-4-c",
+            "Consulta 4.C: Quais pessoas (dados completos) moram em avenidas? Por meio de NamedQuery",
+            pessoasFromNamedQuery
+        ));
+    }
+    
+    private void generateHtmlQuestao5(PrintWriter out) {
+        List<Pessoa> pessoasFromQuery = pessoaBean.findAllNotInPraca_Query();
+        out.println(buildHtmlQuestao(
+            "consulta-5-a",
+            "Consulta 5.A: Quais pessoas (dados completos) não moram em praças? Por meio de Query",
+            pessoasFromQuery
+        ));
+        
+        List<Pessoa> pessoasFromTypedQuery = pessoaBean.findAllNotInPraca_TypedQuery();
+        out.println(buildHtmlQuestao(
+            "consulta-5-b",
+            "Consulta 5.B: Quais pessoas (dados completos) não moram em praças? Por meio de TypedQuery",
+            pessoasFromTypedQuery
+        ));
+        
+        List<Pessoa> pessoasFromNamedQuery = pessoaBean.findAllNotInPraca_NamedQuery();
+        out.println(buildHtmlQuestao(
+            "consulta-5-c",
+            "Consulta 5.C: Quais pessoas (dados completos) não moram em praças? Por meio de NamedQuery",
+            pessoasFromNamedQuery
+        ));
+    }
+    
+    private void generateHtmlQuestao6(PrintWriter out) {
+        List<Object[]> pessoasFromQuery = pessoaBean.findAllNomeTelefone_Query();
+        out.println(buildHtmlQuestao(
+            "consulta-6-a",
+            "Consulta 6.A: Quais pessoas (nomes) e seus respectivos telefones (dados completos)? Por meio de Query",
+            pessoasFromQuery
+        ));
+        
+        List<Object[]> pessoasFromTypedQuery = pessoaBean.findAllNomeTelefone_TypedQuery();
+        out.println(buildHtmlQuestao(
+            "consulta-6-b",
+            "Consulta 6.B: Quais pessoas (nomes) e seus respectivos telefones (dados completos)? Por meio de TypedQuery",
+            pessoasFromTypedQuery
+        ));
+        
+        List<Object[]> pessoasFromNamedQuery = pessoaBean.findAllNomeTelefone_NamedQuery();
+        out.println(buildHtmlQuestao(
+            "consulta-6-c",
+            "Consulta 6.C: Quais pessoas (nomes) e seus respectivos telefones (dados completos)? Por meio de NamedQuery",
             pessoasFromNamedQuery
         ));
     }

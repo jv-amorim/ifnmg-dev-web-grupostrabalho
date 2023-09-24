@@ -24,7 +24,10 @@ import javax.persistence.Transient;
 @NamedQueries({
     @NamedQuery(name = "Pessoa.findAll", query = "SELECT p FROM Pessoa p"),
     @NamedQuery(name = "Pessoa.findAllNome", query = "SELECT p.nome FROM Pessoa p"),
-    @NamedQuery(name = "Pessoa.findAllNomeEndereco", query = "SELECT p.nome, p.endereco FROM Pessoa p")
+    @NamedQuery(name = "Pessoa.findAllNomeEndereco", query = "SELECT p.nome, p.endereco FROM Pessoa p"),
+    @NamedQuery(name = "Pessoa.findAllInAvenida", query = "SELECT p FROM Pessoa p WHERE p.endereco.tipoLogradouro = 1"),
+    @NamedQuery(name = "Pessoa.findAllNotInPraca", query = "SELECT p FROM Pessoa p WHERE p.endereco.tipoLogradouro != 2"),
+    @NamedQuery(name = "Pessoa.findAllNomeTelefone", query = "SELECT p.nome, t FROM Pessoa p, IN (p.telefones) t"),
 })
 public class Pessoa implements Serializable {
 
