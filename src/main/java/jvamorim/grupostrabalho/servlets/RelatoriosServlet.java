@@ -2,13 +2,21 @@ package jvamorim.grupostrabalho.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import jvamorim.grupostrabalho.beans.PessoaBeanLocal;
+import jvamorim.grupostrabalho.models.entities.Pessoa;
+import jvamorim.grupostrabalho.utils.Utils;
 
 public class RelatoriosServlet extends HttpServlet {
 
+    @Inject
+    private PessoaBeanLocal pessoaBean;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -20,16 +28,20 @@ public class RelatoriosServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
+        
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RelatoriosServlet</title>");            
+            out.println("<title>Estudo Dirigido: JPQL - Relatórios</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RelatoriosServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Estudo Dirigido: JPQL - Relatórios</h1>");
+            
+            generateHtmlQuestao1(out);
+            
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,7 +83,22 @@ public class RelatoriosServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Estudo Dirigido: JPQL - Relatórios";
     }// </editor-fold>
 
+    private void generateHtmlQuestao1(PrintWriter out) {
+        List<Pessoa> pessoasFromQuery = pessoaBean.findAll_Query();
+        List<Pessoa> pessoasFromTypedQuery = pessoaBean.findAll_TypedQuery();
+        List<Pessoa> pessoasFromNamedQuery = pessoaBean.findAll_NamedQuery();
+        
+        out.println("<h2>Consulta 1.A: Quais as pessoas (dados completos) cadastradas? Por meio de Query.</h2>");
+        out.println(Utils.toJson(pessoasFromQuery));
+        
+        out.println("<h2>Consulta 1.B: Quais as pessoas (dados completos) cadastradas? Por meio de TypedQuery.</h2>");
+        out.println(Utils.toJson(pessoasFromTypedQuery));
+        
+        out.println("<h2>Consulta 1.C: Quais as pessoas (dados completos) cadastradas? Por meio de NamedQuery.</h2>");
+        out.println(Utils.toJson(pessoasFromNamedQuery));
+    }
+    
 }

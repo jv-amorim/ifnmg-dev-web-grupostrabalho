@@ -3,8 +3,10 @@ package jvamorim.grupostrabalho.models.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,9 +31,10 @@ public class Grupo implements Serializable {
     
     @ManyToOne
     @JoinColumn(name = "liderid", nullable = false)
+    @JsonbTransient
     private Pessoa lider;
     
-    @OneToMany(mappedBy = "grupo")
+    @OneToMany(mappedBy = "grupo", fetch = FetchType.EAGER)
     private List<Atuacao> atuacoes;
     
     //<editor-fold defaultstate="collapsed" desc="Constructors">

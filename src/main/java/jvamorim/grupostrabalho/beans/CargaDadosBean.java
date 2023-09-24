@@ -157,6 +157,14 @@ public class CargaDadosBean implements CargaDadosBeanLocal {
         pessoaAna.getAtuacoes().add(atuacao1);
         
         Atuacao atuacao2 = new Atuacao();
+        atuacao1.setGrupo(grupo1);
+        atuacao1.setPessoa(pessoaAna);
+        atuacao1.setInicio(LocalDate.of(2012, 01, 01));
+        atuacao1.setTermino(LocalDate.of(2022, 11, 11));
+        grupo1.getAtuacoes().add(atuacao1);
+        pessoaAna.getAtuacoes().add(atuacao1);
+        
+        Atuacao atuacao3 = new Atuacao();
         atuacao2.setGrupo(grupo1);
         atuacao2.setPessoa(pessoaBeatriz);
         atuacao2.setInicio(LocalDate.of(2012, 01, 02));
@@ -164,7 +172,7 @@ public class CargaDadosBean implements CargaDadosBeanLocal {
         grupo1.getAtuacoes().add(atuacao2);
         pessoaBeatriz.getAtuacoes().add(atuacao2);
         
-        Atuacao atuacao3 = new Atuacao();
+        Atuacao atuacao4 = new Atuacao();
         atuacao3.setGrupo(grupo1);
         atuacao3.setPessoa(pessoaCecilia);
         atuacao3.setInicio(LocalDate.of(2013, 01, 03));
@@ -172,7 +180,7 @@ public class CargaDadosBean implements CargaDadosBeanLocal {
         grupo1.getAtuacoes().add(atuacao3);
         pessoaCecilia.getAtuacoes().add(atuacao3);
         
-        Atuacao atuacao4 = new Atuacao();
+        Atuacao atuacao5 = new Atuacao();
         atuacao4.setGrupo(grupo1);
         atuacao4.setPessoa(pessoaDebora);
         atuacao4.setInicio(LocalDate.of(2014, 01, 04));
@@ -180,21 +188,21 @@ public class CargaDadosBean implements CargaDadosBeanLocal {
         grupo1.getAtuacoes().add(atuacao4);
         pessoaDebora.getAtuacoes().add(atuacao4);
         
-        Atuacao atuacao5 = new Atuacao();
+        Atuacao atuacao6 = new Atuacao();
         atuacao5.setGrupo(grupo2);
         atuacao5.setPessoa(pessoaBeatriz);
         atuacao5.setInicio(LocalDate.of(2012, 01, 02));
         grupo2.getAtuacoes().add(atuacao5);
         pessoaBeatriz.getAtuacoes().add(atuacao5);
         
-        Atuacao atuacao6 = new Atuacao();
+        Atuacao atuacao7 = new Atuacao();
         atuacao6.setGrupo(grupo2);
         atuacao6.setPessoa(pessoaDebora);
         atuacao6.setInicio(LocalDate.of(2012, 01, 02));
         grupo2.getAtuacoes().add(atuacao6);
         pessoaDebora.getAtuacoes().add(atuacao6);
         
-        Atuacao atuacao7 = new Atuacao();
+        Atuacao atuacao8 = new Atuacao();
         atuacao7.setGrupo(grupo3);
         atuacao7.setPessoa(pessoaCecilia);
         atuacao7.setInicio(LocalDate.of(2012, 01, 03));
@@ -202,7 +210,7 @@ public class CargaDadosBean implements CargaDadosBeanLocal {
         grupo3.getAtuacoes().add(atuacao7);
         pessoaCecilia.getAtuacoes().add(atuacao7);
         
-        Atuacao atuacao8 = new Atuacao();
+        Atuacao atuacao9 = new Atuacao();
         atuacao8.setGrupo(grupo3);
         atuacao8.setPessoa(pessoaDebora);
         atuacao8.setInicio(LocalDate.of(2012, 01, 03));
@@ -210,7 +218,7 @@ public class CargaDadosBean implements CargaDadosBeanLocal {
         grupo3.getAtuacoes().add(atuacao8);
         pessoaDebora.getAtuacoes().add(atuacao8);
         
-        Atuacao atuacao9 = new Atuacao();
+        Atuacao atuacao10 = new Atuacao();
         atuacao9.setGrupo(grupo4);
         atuacao9.setPessoa(pessoaBeatriz);
         atuacao9.setInicio(LocalDate.of(2012, 01, 04));
@@ -218,7 +226,7 @@ public class CargaDadosBean implements CargaDadosBeanLocal {
         grupo4.getAtuacoes().add(atuacao9);
         pessoaBeatriz.getAtuacoes().add(atuacao9);
         
-        Atuacao atuacao10 = new Atuacao();
+        Atuacao atuacao11 = new Atuacao();
         atuacao10.setGrupo(grupo4);
         atuacao10.setPessoa(pessoaCecilia);
         atuacao10.setInicio(LocalDate.of(2012, 01, 04));
@@ -226,7 +234,7 @@ public class CargaDadosBean implements CargaDadosBeanLocal {
         grupo4.getAtuacoes().add(atuacao10);
         pessoaCecilia.getAtuacoes().add(atuacao10);
         
-        Atuacao atuacao11 = new Atuacao();
+        Atuacao atuacao12 = new Atuacao();
         atuacao11.setGrupo(grupo4);
         atuacao11.setPessoa(pessoaDebora);
         atuacao11.setInicio(LocalDate.of(2012, 01, 04));

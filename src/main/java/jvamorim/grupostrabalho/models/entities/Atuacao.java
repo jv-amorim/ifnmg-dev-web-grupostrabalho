@@ -2,29 +2,32 @@ package jvamorim.grupostrabalho.models.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 
 @Entity
 public class Atuacao implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    @EmbeddedId
-    private AtuacaoKey id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
     @ManyToOne
-    @MapsId("pessoaId")
     @JoinColumn(name = "pessoaid", nullable = false)
+    @JsonbTransient
     private Pessoa pessoa;
     
     @ManyToOne
-    @MapsId("grupoId")
     @JoinColumn(name = "grupoid", nullable = false)
+    @JsonbTransient
     private Grupo grupo;
     
     @Column(nullable = false)
@@ -33,21 +36,13 @@ public class Atuacao implements Serializable {
     @Column(nullable = true)
     private LocalDate termino;
     
-    //<editor-fold defaultstate="collapsed" desc="Constructors">
-    
-    public Atuacao() {
-        id = new AtuacaoKey();
-    }
-    
-    //</editor-fold>
-    
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     
-    public AtuacaoKey getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(AtuacaoKey id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
