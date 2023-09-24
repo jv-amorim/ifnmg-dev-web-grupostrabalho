@@ -8,10 +8,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 import jvamorim.grupostrabalho.beans.PessoaBeanLocal;
 import jvamorim.grupostrabalho.models.entities.Pessoa;
 import jvamorim.grupostrabalho.utils.Utils;
 
+@Transactional
 public class RelatoriosServlet extends HttpServlet {
 
     @Inject
@@ -91,14 +93,14 @@ public class RelatoriosServlet extends HttpServlet {
         List<Pessoa> pessoasFromTypedQuery = pessoaBean.findAll_TypedQuery();
         List<Pessoa> pessoasFromNamedQuery = pessoaBean.findAll_NamedQuery();
         
-        out.println("<h2>Consulta 1.A: Quais as pessoas (dados completos) cadastradas? Por meio de Query.</h2>");
-        out.println(Utils.toJson(pessoasFromQuery));
+        out.println("<h2>Consulta 1.A: Quais as pessoas (dados completos) cadastradas? Por meio de Query</h2>");
+        out.println("<p><pre>" + Utils.toJson(pessoasFromQuery) + "</pre></p>");
         
-        out.println("<h2>Consulta 1.B: Quais as pessoas (dados completos) cadastradas? Por meio de TypedQuery.</h2>");
-        out.println(Utils.toJson(pessoasFromTypedQuery));
+        out.println("<h2>Consulta 1.B: Quais as pessoas (dados completos) cadastradas? Por meio de TypedQuery</h2>");
+        out.println("<p><pre>" + Utils.toJson(pessoasFromTypedQuery) + "</pre></p>");
         
-        out.println("<h2>Consulta 1.C: Quais as pessoas (dados completos) cadastradas? Por meio de NamedQuery.</h2>");
-        out.println(Utils.toJson(pessoasFromNamedQuery));
+        out.println("<h2>Consulta 1.C: Quais as pessoas (dados completos) cadastradas? Por meio de NamedQuery</h2>");
+        out.println("<p><pre>" + Utils.toJson(pessoasFromNamedQuery) + "</pre></p>");
     }
     
 }
