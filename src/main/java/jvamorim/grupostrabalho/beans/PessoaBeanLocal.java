@@ -1,5 +1,6 @@
 package jvamorim.grupostrabalho.beans;
 
+import java.time.LocalDate;
 import java.util.List;
 import jvamorim.grupostrabalho.models.entities.Pessoa;
 
@@ -42,5 +43,9 @@ public interface PessoaBeanLocal {
     List<Object[]> findAllNomeTelefone_TypedQuery();
     
     List<Object[]> findAllNomeTelefone_NamedQuery();
+    
+    List<Pessoa> findAllInNascimentoInterval(LocalDate dataInicial, LocalDate dataFinal);
+
+    List<Pessoa> findAllByTelefonePrefixo(String prefixo);
     
 }

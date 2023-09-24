@@ -1,5 +1,6 @@
 package jvamorim.grupostrabalho.beans;
 
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -122,6 +123,21 @@ public class PessoaBean implements PessoaBeanLocal {
     @Override
     public List<Object[]> findAllNomeTelefone_NamedQuery() {
         TypedQuery q = entityManager.createNamedQuery("Pessoa.findAllNomeTelefone", Object[].class);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Pessoa> findAllInNascimentoInterval(LocalDate dataInicial, LocalDate dataFinal) {
+        TypedQuery q = entityManager.createNamedQuery("Pessoa.findAllInNascimentoInterval", Pessoa.class);
+        q.setParameter("dataInicial", dataInicial);
+        q.setParameter("dataFinal", dataFinal);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Pessoa> findAllByTelefonePrefixo(String prefixo) {
+        TypedQuery q = entityManager.createNamedQuery("Pessoa.findAllByTelefonePrefixo", Pessoa.class);
+        q.setParameter("prefixo", prefixo);
         return q.getResultList();
     }
     

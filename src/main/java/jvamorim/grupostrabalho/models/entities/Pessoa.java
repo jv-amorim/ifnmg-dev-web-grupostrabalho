@@ -22,12 +22,42 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "pessoa")
 @NamedQueries({
-    @NamedQuery(name = "Pessoa.findAll", query = "SELECT p FROM Pessoa p"),
-    @NamedQuery(name = "Pessoa.findAllNome", query = "SELECT p.nome FROM Pessoa p"),
-    @NamedQuery(name = "Pessoa.findAllNomeEndereco", query = "SELECT p.nome, p.endereco FROM Pessoa p"),
-    @NamedQuery(name = "Pessoa.findAllInAvenida", query = "SELECT p FROM Pessoa p WHERE p.endereco.tipoLogradouro = 1"),
-    @NamedQuery(name = "Pessoa.findAllNotInPraca", query = "SELECT p FROM Pessoa p WHERE p.endereco.tipoLogradouro != 2"),
-    @NamedQuery(name = "Pessoa.findAllNomeTelefone", query = "SELECT p.nome, t FROM Pessoa p, IN (p.telefones) t"),
+    @NamedQuery(
+        name = "Pessoa.findAll",
+        query = "SELECT p FROM Pessoa p"
+    ),
+    @NamedQuery(
+        name = "Pessoa.findAllNome",
+        query = "SELECT p.nome FROM Pessoa p"
+    ),
+    @NamedQuery(
+        name = "Pessoa.findAllNomeEndereco",
+        query = "SELECT p.nome, p.endereco FROM Pessoa p"
+    ),
+    @NamedQuery(
+        name = "Pessoa.findAllInAvenida",
+        query = "SELECT p FROM Pessoa p "
+                + "WHERE p.endereco.tipoLogradouro = 1"
+    ),
+    @NamedQuery(
+        name = "Pessoa.findAllNotInPraca",
+        query = "SELECT p FROM Pessoa p "
+                + "WHERE p.endereco.tipoLogradouro != 2"
+    ),
+    @NamedQuery(
+        name = "Pessoa.findAllNomeTelefone",
+        query = "SELECT p.nome, t FROM Pessoa p, IN (p.telefones) t"
+    ),
+    @NamedQuery(
+        name = "Pessoa.findAllInNascimentoInterval",
+        query = "SELECT p FROM Pessoa p "
+                + "WHERE p.nascimento BETWEEN :dataInicial AND :dataFinal"
+    ),
+    @NamedQuery(
+        name = "Pessoa.findAllByTelefonePrefixo",
+        query = "SELECT DISTINCT p FROM Pessoa p, IN (p.telefones) t "
+                + "WHERE CONCAT('', t.ddd, t.numero) LIKE CONCAT(:prefixo, '%')"
+    ),
 })
 public class Pessoa implements Serializable {
 

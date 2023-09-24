@@ -2,6 +2,7 @@ package jvamorim.grupostrabalho.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -50,6 +51,8 @@ public class RelatoriosServlet extends HttpServlet {
             generateHtmlQuestao4(out);
             generateHtmlQuestao5(out);
             generateHtmlQuestao6(out);
+            generateHtmlQuestao7(out);
+            generateHtmlQuestao8(out);
             generateHtmlScript(out);
             
             out.println("</body>");
@@ -123,6 +126,11 @@ public class RelatoriosServlet extends HttpServlet {
         out.println("<li><a href=\"#consulta-6-a\"> Consulta 6.A </a></li>");
         out.println("<li><a href=\"#consulta-6-b\"> Consulta 6.B </a></li>");
         out.println("<li><a href=\"#consulta-6-c\"> Consulta 6.C </a></li>");
+        
+        out.println("<li><a href=\"#consulta-7\"> Consulta 7 </a></li>");
+        
+        out.println("<li><a href=\"#consulta-8-a\"> Consulta 8.A </a></li>");
+        out.println("<li><a href=\"#consulta-8-b\"> Consulta 8.B </a></li>");
         
         out.println("</ul>");
     }
@@ -272,6 +280,31 @@ public class RelatoriosServlet extends HttpServlet {
             "consulta-6-c",
             "Consulta 6.C: Quais pessoas (nomes) e seus respectivos telefones (dados completos)? Por meio de NamedQuery",
             pessoasFromNamedQuery
+        ));
+    }
+    
+    private void generateHtmlQuestao7(PrintWriter out) {
+        List<Pessoa> pessoas = pessoaBean.findAllInNascimentoInterval(LocalDate.of(2001, 04, 01), LocalDate.of(2004, 05, 01).minusDays(1));
+        out.println(buildHtmlQuestao(
+            "consulta-7",
+            "Consulta 7: Quais as pessoas (dados completos) que nasceram entre abril de 2001 e abril de 2004?",
+            pessoas
+        ));
+    }
+    
+    private void generateHtmlQuestao8(PrintWriter out) {
+        List<Pessoa> pessoasParana = pessoaBean.findAllByTelefonePrefixo("4");
+        out.println(buildHtmlQuestao(
+            "consulta-8-a",
+            "Consulta 8.A: Quais pessoas (dados completos) têm telefone do estado do Paraná?",
+            pessoasParana
+        ));
+        
+        List<Pessoa> pessoasRio = pessoaBean.findAllByTelefonePrefixo("2");
+        out.println(buildHtmlQuestao(
+            "consulta-8-b",
+            "Consulta 8.B: Quais pessoas (dados completos) têm telefone do estado do Rio de Janeiro?",
+            pessoasRio
         ));
     }
  
