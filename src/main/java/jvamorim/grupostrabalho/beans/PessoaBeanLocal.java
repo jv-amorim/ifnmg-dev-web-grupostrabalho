@@ -13,4 +13,16 @@ public interface PessoaBeanLocal {
     
     List<Pessoa> findAll_NamedQuery();
     
+    List<String> findAllNome_Query();
+    
+    List<String> findAllNome_TypedQuery();
+    
+    List<String> findAllNome_NamedQuery();
+    
+    List<Pessoa> findAllNomeEndereco_Query();
+    
+    List<Pessoa> findAllNomeEndereco_TypedQuery();
+    
+    List<Pessoa> findAllNomeEndereco_NamedQuery();
+    
 }

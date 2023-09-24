@@ -41,8 +41,13 @@ public class RelatoriosServlet extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Estudo Dirigido: JPQL - Relatórios</h1>");
+            out.println("<p><i>Utilize o sumário e os botões de navegação (setas) para uma melhor experiência.</i></p>");
             
+            generateHtmlIndex(out);
             generateHtmlQuestao1(out);
+            generateHtmlQuestao2(out);
+            generateHtmlQuestao3(out);
+            generateHtmlScript(out);
             
             out.println("</body>");
             out.println("</html>");
@@ -87,20 +92,126 @@ public class RelatoriosServlet extends HttpServlet {
     public String getServletInfo() {
         return "Estudo Dirigido: JPQL - Relatórios";
     }// </editor-fold>
+    
+    private void generateHtmlIndex(PrintWriter out) {
+        out.println("<h2 id=\"index\">Sumário</h2>");
+        out.println("<ul>");
+        out.println("<li><a href=\"#consulta-1-a\"> Consulta 1.A </a></li>");
+        out.println("<li><a href=\"#consulta-1-b\"> Consulta 1.B </a></li>");
+        out.println("<li><a href=\"#consulta-1-c\"> Consulta 1.C </a></li>");
+        out.println("<li><a href=\"#consulta-2-a\"> Consulta 2.A </a></li>");
+        out.println("<li><a href=\"#consulta-2-b\"> Consulta 2.B </a></li>");
+        out.println("<li><a href=\"#consulta-2-c\"> Consulta 2.C </a></li>");
+        out.println("<li><a href=\"#consulta-3-a\"> Consulta 3.A </a></li>");
+        out.println("<li><a href=\"#consulta-3-b\"> Consulta 3.B </a></li>");
+        out.println("<li><a href=\"#consulta-3-c\"> Consulta 3.C </a></li>");
+        out.println("</ul>");
+    }
 
+    private String buildHtmlQuestao(String id, String title, Object result) {
+        String html = "<h2 id=\"" + id + "\">";
+        html += "<a href=\"#index\" style=\"text-decoration: none; cursor: pointer;\">⬅️</a> ";
+        html += "<a onclick=\"navigatePrevious('" + id + "')\" style=\"text-decoration: none; cursor: pointer;\">⬆️️</a> ";
+        html += "<a onclick=\"navigateNext('" + id + "')\" style=\"text-decoration: none; cursor: pointer;\">⬇️️</a> ";
+        html += title + "</h2>";
+        html += "<p><pre>" + Utils.toJson(result) + "</pre></p>";
+        return html;
+    }
+    
     private void generateHtmlQuestao1(PrintWriter out) {
         List<Pessoa> pessoasFromQuery = pessoaBean.findAll_Query();
+        out.println(buildHtmlQuestao(
+            "consulta-1-a",
+            "Consulta 1.A: Quais as pessoas (dados completos) cadastradas? Por meio de Query",
+            pessoasFromQuery
+        ));
+        
         List<Pessoa> pessoasFromTypedQuery = pessoaBean.findAll_TypedQuery();
+        out.println(buildHtmlQuestao(
+            "consulta-1-b",
+            "Consulta 1.B: Quais as pessoas (dados completos) cadastradas? Por meio de TypedQuery",
+            pessoasFromTypedQuery
+        ));
+        
         List<Pessoa> pessoasFromNamedQuery = pessoaBean.findAll_NamedQuery();
+        out.println(buildHtmlQuestao(
+            "consulta-1-c",
+            "Consulta 1.C: Quais as pessoas (dados completos) cadastradas? Por meio de NamedQuery",
+            pessoasFromNamedQuery
+        ));
+    }
+    
+    private void generateHtmlQuestao2(PrintWriter out) {
+        List<String> nomesFromQuery = pessoaBean.findAllNome_Query();
+        out.println(buildHtmlQuestao(
+            "consulta-2-a",
+            "Consulta 2.A: Quais os nomes das pessoas? Por meio de Query",
+            nomesFromQuery
+        ));
         
-        out.println("<h2>Consulta 1.A: Quais as pessoas (dados completos) cadastradas? Por meio de Query</h2>");
-        out.println("<p><pre>" + Utils.toJson(pessoasFromQuery) + "</pre></p>");
+        List<String> nomesFromTypedQuery = pessoaBean.findAllNome_TypedQuery();
+        out.println(buildHtmlQuestao(
+            "consulta-2-b",
+            "Consulta 2.B: Quais os nomes das pessoas? Por meio de TypedQuery",
+            nomesFromTypedQuery
+        ));
         
-        out.println("<h2>Consulta 1.B: Quais as pessoas (dados completos) cadastradas? Por meio de TypedQuery</h2>");
-        out.println("<p><pre>" + Utils.toJson(pessoasFromTypedQuery) + "</pre></p>");
+        List<String> nomesFromNamedQuery = pessoaBean.findAllNome_NamedQuery();
+        out.println(buildHtmlQuestao(
+            "consulta-2-c",
+            "Consulta 2.C: Quais os nomes das pessoas? Por meio de NamedQuery",
+            nomesFromNamedQuery
+        ));
+    }
+    
+    private void generateHtmlQuestao3(PrintWriter out) {
+        List<Pessoa> pessoasFromQuery = pessoaBean.findAllNomeEndereco_Query();
+        out.println(buildHtmlQuestao(
+            "consulta-3-a",
+            "Consulta 3.A: Quais as pessoas (nome) e seus respectivos endereços (dados completos)? Por meio de Query",
+            pessoasFromQuery
+        ));
         
-        out.println("<h2>Consulta 1.C: Quais as pessoas (dados completos) cadastradas? Por meio de NamedQuery</h2>");
-        out.println("<p><pre>" + Utils.toJson(pessoasFromNamedQuery) + "</pre></p>");
+        List<Pessoa> pessoasFromTypedQuery = pessoaBean.findAllNomeEndereco_TypedQuery();
+        out.println(buildHtmlQuestao(
+            "consulta-3-b",
+            "Consulta 3.B: Quais as pessoas (nome) e seus respectivos endereços (dados completos)? Por meio de TypedQuery",
+            pessoasFromTypedQuery
+        ));
+        
+        List<Pessoa> pessoasFromNamedQuery = pessoaBean.findAllNomeEndereco_NamedQuery();
+        out.println(buildHtmlQuestao(
+            "consulta-3-c",
+            "Consulta 3.C: Quais as pessoas (nome) e seus respectivos endereços (dados completos)? Por meio de NamedQuery",
+            pessoasFromNamedQuery
+        ));
+    }
+ 
+    private void generateHtmlScript(PrintWriter out) {
+        out.println("<script>\n" +
+                    "    function navigatePrevious(currentId) {\n" +
+                    "        var allSections = document.querySelectorAll('h2');\n" +
+                    "        var previous = null\n" +
+                    "        for (const section of allSections) {\n" +
+                    "            if (previous != null && section.id == currentId) {\n" +
+                    "                previous.scrollIntoView({ behavior: \"smooth\" });\n" +
+                    "                break;\n" +
+                    "            }\n" +
+                    "            previous = section;\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "    function navigateNext(currentId) {\n" +
+                    "        var allSections = document.querySelectorAll('h2');\n" +
+                    "        var previous = null\n" +
+                    "        for (const section of allSections) {\n" +
+                    "            if (previous != null && previous.id == currentId) {\n" +
+                    "                section.scrollIntoView({ behavior: \"smooth\" });\n" +
+                    "                break;\n" +
+                    "            }\n" +
+                    "            previous = section;\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "</script>");
     }
     
 }
