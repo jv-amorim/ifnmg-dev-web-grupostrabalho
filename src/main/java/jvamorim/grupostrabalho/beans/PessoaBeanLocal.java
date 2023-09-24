@@ -47,5 +47,9 @@ public interface PessoaBeanLocal {
     List<Pessoa> findAllInNascimentoInterval(LocalDate dataInicial, LocalDate dataFinal);
 
     List<Pessoa> findAllByTelefonePrefixo(String prefixo);
+
+    List<Pessoa> findAllWithoutTelefone();
+    
+    List<Object[]> findAllTelefoneCount();
     
 }

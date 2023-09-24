@@ -140,5 +140,17 @@ public class PessoaBean implements PessoaBeanLocal {
         q.setParameter("prefixo", prefixo);
         return q.getResultList();
     }
-    
+
+    @Override
+    public List<Pessoa> findAllWithoutTelefone() {
+        TypedQuery q = entityManager.createNamedQuery("Pessoa.findAllWithoutTelefone", Pessoa.class);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Object[]> findAllTelefoneCount() {
+        TypedQuery q = entityManager.createNamedQuery("Pessoa.findAllTelefoneCount", Object[].class);
+        return q.getResultList();
+    }
+
 }

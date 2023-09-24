@@ -24,39 +24,59 @@ import javax.persistence.Transient;
 @NamedQueries({
     @NamedQuery(
         name = "Pessoa.findAll",
-        query = "SELECT p FROM Pessoa p"
+        query = "SELECT p "
+              + "FROM Pessoa p"
     ),
     @NamedQuery(
         name = "Pessoa.findAllNome",
-        query = "SELECT p.nome FROM Pessoa p"
+        query = "SELECT p.nome "
+              + "FROM Pessoa p"
     ),
     @NamedQuery(
         name = "Pessoa.findAllNomeEndereco",
-        query = "SELECT p.nome, p.endereco FROM Pessoa p"
+        query = "SELECT p.nome, p.endereco "
+              + "FROM Pessoa p"
     ),
     @NamedQuery(
         name = "Pessoa.findAllInAvenida",
-        query = "SELECT p FROM Pessoa p "
-                + "WHERE p.endereco.tipoLogradouro = 1"
+        query = "SELECT p "
+              + "FROM Pessoa p "
+              + "WHERE p.endereco.tipoLogradouro = 1"
     ),
     @NamedQuery(
         name = "Pessoa.findAllNotInPraca",
-        query = "SELECT p FROM Pessoa p "
-                + "WHERE p.endereco.tipoLogradouro != 2"
+        query = "SELECT p "
+              + "FROM Pessoa p "
+              + "WHERE p.endereco.tipoLogradouro != 2"
     ),
     @NamedQuery(
         name = "Pessoa.findAllNomeTelefone",
-        query = "SELECT p.nome, t FROM Pessoa p, IN (p.telefones) t"
+        query = "SELECT p.nome, t "
+              + "FROM Pessoa p, IN (p.telefones) t"
     ),
     @NamedQuery(
         name = "Pessoa.findAllInNascimentoInterval",
-        query = "SELECT p FROM Pessoa p "
-                + "WHERE p.nascimento BETWEEN :dataInicial AND :dataFinal"
+        query = "SELECT p "
+              + "FROM Pessoa p "
+              + "WHERE p.nascimento BETWEEN :dataInicial AND :dataFinal"
     ),
     @NamedQuery(
         name = "Pessoa.findAllByTelefonePrefixo",
-        query = "SELECT DISTINCT p FROM Pessoa p, IN (p.telefones) t "
-                + "WHERE CONCAT('', t.ddd, t.numero) LIKE CONCAT(:prefixo, '%')"
+        query = "SELECT DISTINCT p "
+              + "FROM Pessoa p, IN (p.telefones) t "
+              + "WHERE CONCAT('', t.ddd, t.numero) LIKE CONCAT(:prefixo, '%')"
+    ),
+    @NamedQuery(
+        name = "Pessoa.findAllWithoutTelefone",
+        query = "SELECT p "
+              + "FROM Pessoa p "
+              + "WHERE p.telefones IS EMPTY"
+    ),
+    @NamedQuery(
+        name = "Pessoa.findAllTelefoneCount",
+        query = "SELECT DISTINCT p.nome, COUNT(t) "
+              + "FROM Pessoa p, IN (p.telefones) t "
+              + "GROUP BY p.nome"
     ),
 })
 public class Pessoa implements Serializable {

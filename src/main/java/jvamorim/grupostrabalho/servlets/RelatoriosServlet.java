@@ -53,6 +53,8 @@ public class RelatoriosServlet extends HttpServlet {
             generateHtmlQuestao6(out);
             generateHtmlQuestao7(out);
             generateHtmlQuestao8(out);
+            generateHtmlQuestao9(out);
+            generateHtmlQuestao10(out);
             generateHtmlScript(out);
             
             out.println("</body>");
@@ -131,6 +133,10 @@ public class RelatoriosServlet extends HttpServlet {
         
         out.println("<li><a href=\"#consulta-8-a\"> Consulta 8.A </a></li>");
         out.println("<li><a href=\"#consulta-8-b\"> Consulta 8.B </a></li>");
+        
+        out.println("<li><a href=\"#consulta-9\"> Consulta 9 </a></li>");
+        
+        out.println("<li><a href=\"#consulta-10\"> Consulta 10 </a></li>");
         
         out.println("</ul>");
     }
@@ -305,6 +311,24 @@ public class RelatoriosServlet extends HttpServlet {
             "consulta-8-b",
             "Consulta 8.B: Quais pessoas (dados completos) têm telefone do estado do Rio de Janeiro?",
             pessoasRio
+        ));
+    }
+    
+    private void generateHtmlQuestao9(PrintWriter out) {
+        List<Pessoa> pessoas = pessoaBean.findAllWithoutTelefone();
+        out.println(buildHtmlQuestao(
+            "consulta-9",
+            "Consulta 9: Quais pessoas (dados completos) não possuem telefone?",
+            pessoas
+        ));
+    }
+    
+    private void generateHtmlQuestao10(PrintWriter out) {
+        List<Object[]> pessoas = pessoaBean.findAllTelefoneCount();
+        out.println(buildHtmlQuestao(
+            "consulta-10",
+            "Consulta 10: Quantos telefones cada pessoa (nome) tem?",
+            pessoas
         ));
     }
  
